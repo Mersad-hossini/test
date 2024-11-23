@@ -1,27 +1,28 @@
-import React, { useEffect, useId, useRef, useState } from 'react'
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import Header from './components/Header/Header'
 
 export default function App() {
+  let [count, setCount] = useState(0);
 
-  let [title, setTitle] = useState("")
-  let [renderCount, setRenderCount] = useState(0)
-
-  let userObj = {
-      id: useId(),
-      username: 'Mersad'
-  }
-  console.log(userObj);
-  
+  const addCounter = () => {
+    setCount((prevCount) => prevCount + 1);
+  };
+  const minusCounter = () => {
+    setCount((prevCount) => prevCount - 1);
+  };
 
   useEffect(() => {
-    setRenderCount(prevCount => prevCount + 1); 
-  }, [title])
-  
+    console.log(count);
+  }, [count]);
 
   return (
     <div>
-      <input type="text" value={title} onChange={e => setTitle(e.target.value)} />
-      <h2>Input Value: {title}</h2>
-      <h2>Renders Count: {renderCount}</h2>
+      <Header />
+      <button onClick={addCounter}>+</button>
+      <h2>{count}</h2>
+      <button onClick={minusCounter}>-</button>
     </div>
-  )
+  );
 }
